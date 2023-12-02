@@ -3,7 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 import CartExample from './components/CartExample';
 import AuthorizationExample from './components/AuthorizationExample';
 import NavigationBar from './components/NavigationBar';
-
+import HeroSection from './components/sitecomp/herosection';
+import CardCollection from './components/sitecomp/cardsection';
+import Footer from './components/sitecomp/footer';
 /**
  * App contains only routing links to examples.
  * Routing is built in index.js
@@ -18,6 +20,9 @@ function App() {
         <Route path='/auth' element={<AuthorizationExample/>}/>
         <Route path='/cart' element={<CartExample/>}/>
       </Routes>
+      <HeroSection />
+      <CardCollection />
+      <Footer />
     </div>
   );
 }
