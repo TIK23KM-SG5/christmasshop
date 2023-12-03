@@ -22,12 +22,6 @@ CREATE TABLE customer(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(255),
     last_name VARCHAR(255),
-    address VARCHAR(255),
-    post_code SMALLINT,
-    city VARCHAR(255),
-    state VARCHAR(255),
-    mobile INT,
-    email VARCHAR(255),
     username VARCHAR(255) UNIQUE,
     pw VARCHAR(255)
 );
