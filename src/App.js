@@ -1,11 +1,12 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import CartExample from './components/CartExample';
 import AuthorizationExample from './components/AuthorizationExample';
 import NavigationBar from './components/sitecomp/navbar';
-import HeroSection from './components/sitecomp/herosection';
-import CardCollection from './components/sitecomp/cardsection';
+import { HeroSection } from './components/sitecomp/herosection';
 import Footer from './components/sitecomp/footer';
+import { Cart } from './components/cart';
+import { Products } from './components/products';
+
 /**
  * App contains only routing links to examples.
  * Routing is built in index.js
@@ -13,15 +14,15 @@ import Footer from './components/sitecomp/footer';
 function App() {
 
   return (
-    <div>
+    <div className='App'>
+      
       <NavigationBar/>
-      <Routes>
-        <Route path='/' element={<h1>Holly Christmas shop</h1>}/>
-        <Route path='/auth' element={<AuthorizationExample/>}/>
-        <Route path='/cart' element={<CartExample/>}/>
-      </Routes>
-      <HeroSection />
-      <CardCollection />
+        <Routes>
+          <Route path='/' element={<HeroSection/>}/>
+          <Route path='/auth' element={<AuthorizationExample/>}/>
+          <Route path='/cart' element={<Cart/>}/>
+          <Route path='/products' element={<Products/>}/>
+        </Routes>
       <Footer />
     </div>
   );
