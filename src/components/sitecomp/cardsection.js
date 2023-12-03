@@ -1,20 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Button from '../uicomp/button';
 
 const CardCollection = () => {
-  const cardsData = [
-    { title: 'Card 1', content: 'Content for Card 1' },
-    { title: 'Card 2', content: 'Content for Card 2' },
-    { title: 'Card 3', content: 'Content for Card 3' },
-  ];
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    // Fetch products when the component mounts
+    axios.get('/products')
+      .then(response => setProducts(response.data))
+      .catch(error => console.error(error));
+  }, []);
 
   return (
     <div className="card-collection">
-      {cardsData.map((card, index) => (
+      {products.map((product, index) => (
         <div key={index} className="card">
-          <h2>{card.title}</h2>
-          <p>{card.content}</p>
-          <Button onClick={() => (console.log("Jee"))} label="Card button" />
+          <h2>{product.productName}</h2>
+          <p>{product.price}</p>
+          <p>{product.category}</p>
+          <Button onClick={() => console.log("Jee")} label="Card button" />
         </div>
       ))}
     </div>
