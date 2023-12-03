@@ -2,7 +2,7 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import CartExample from './components/CartExample';
 import AuthorizationExample from './components/AuthorizationExample';
-import NavigationBar from './components/NavigationBar';
+import NavigationBar from './components/sitecomp/navbar';
 import HeroSection from './components/sitecomp/herosection';
 import CardCollection from './components/sitecomp/cardsection';
 import Footer from './components/sitecomp/footer';
