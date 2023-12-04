@@ -5,6 +5,9 @@ import CardCollection from './sitecomp/cardsection'
 
 export const Products = () => {
   return (
-    <div><CardCollection/></div>
+
+    <div>
+      <CardCollection/>
+    </div>
   )
 }

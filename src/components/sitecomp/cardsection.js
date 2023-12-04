@@ -24,6 +24,8 @@ const CardCollection = () => {
 }
 
 
+
+
   return (
     <div className="card-collection">
       {products.map((product, index) => (
@@ -32,6 +34,7 @@ const CardCollection = () => {
           <p>{product.price}</p>
           <p>{product.category}</p>
           <Button onClick={() => AddToCart(product)} label="Add to cart" />
+          
         </div>
       ))}
     </div>
