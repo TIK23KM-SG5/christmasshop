@@ -12,6 +12,9 @@ const NavigationBar = () => {
           <Link to="/" className="navbar-brand">
             {customerData.value ? customerData.value.lname : 'Home'}
           </Link>
+          <Link to ="/categories" className='navbar-brand'>
+            Categories
+          </Link>
           <Link to="/products" className='navbar-brand'>
             Products
           </Link>

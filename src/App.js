@@ -6,6 +6,10 @@ import { HeroSection } from './components/sitecomp/herosection';
 import Footer from './components/sitecomp/footer';
 import { Cart } from './components/cart';
 import { Products } from './components/products';
+import { Categories } from './components/categories';
+import CardCollection from './components/sitecomp/cardsection';
+
+
 
 /**
  * App contains only routing links to examples.
@@ -21,7 +25,9 @@ function App() {
           <Route path='/' element={<HeroSection/>}/>
           <Route path='/auth' element={<AuthorizationExample/>}/>
           <Route path='/cart' element={<Cart/>}/>
-          <Route path='/products' element={<Products/>}/>
+          <Route path='/products/:category' element={<CardCollection/>}/>
+          <Route path='/products' element={<CardCollection/>}/>
+          <Route path='/categories' element={<Categories/>}/>
         </Routes>
       <Footer />
     </div>

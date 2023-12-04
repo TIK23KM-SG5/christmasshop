@@ -2,13 +2,24 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Button from '../uicomp/button';
 import { cartSignal } from "../signals";
+import { useParams } from 'react-router-dom';
+
 
 const CardCollection = () => {
   const [products, setProducts] = useState([]);
 
+  const {category} = useParams();
+  console.log(category);
+
   useEffect(() => {
     // Fetch products when the component mounts
-    axios.get('http://localhost:3001/products')
+    let url = 'http://localhost:3001/products';
+
+    if(category) {
+      url = url + '?category=' + category;
+    }
+
+    axios.get(url)
       .then(response => setProducts(response.data))
       .catch(error => console.error(error));
   }, []);
@@ -23,16 +34,13 @@ const CardCollection = () => {
     }
 }
 
-
-
-
   return (
     <div className="card-collection">
       {products.map((product, index) => (
         <div key={index} className="card">
           <h2>{product.productName}</h2>
           <p>{product.price}</p>
-          <p>{product.category}</p>
+          
           <Button onClick={() => AddToCart(product)} label="Add to cart" />
           
         </div>
