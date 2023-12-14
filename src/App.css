@@ -5,7 +5,7 @@ body {
 }
 
 .app-container {
-  border: 1px solid black;
+  border: 1px solid  red;
 }
 
 .navbar-container {
@@ -18,36 +18,39 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border: 1px solid #000;
+  border: 1px solid  red;
 }
 
 .navbar-brand {
   text-decoration: none;
-  color: black;
-  font-weight: bold;
+  color:  red;
+  font-weight: bolder;
 }
 
 .navbar-links {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: bolder;
 }
 
 .navbar-link {
   margin-left: 10px;
   text-decoration: none;
-  color: black;
+  color: red;
 }
 
 .hero-section {
-  border: 1px solid black;
-  padding: 40px 0;
+  border: 20px groove  rgb(116, 56, 56);
+  padding: 0px 0;
   text-align: center;
+  background-image: url(../public/app_background.png);
+  background-size: 105%;
 }
 
 .hero-content {
   max-width: 800px;
-  margin: 4px auto;
+  margin: auto;
 }
 
 .card-collection {
@@ -58,7 +61,7 @@ body {
 }
 
 .card {
-  border: 1px solid black;
+  border: 1px solid  red;
   padding: 20px;
   text-align: center;
   flex: 0 1 calc(20% - 8px); /* 20% width with some margin */
@@ -66,9 +69,10 @@ body {
 }
 
 .footer {
-  border: 1px solid black;
-  background-color: #333;
-  color: white;
+  background-color: #f0cfcf;
+  background: transparent;
+  color: rgb(19, 2, 2);
+  font-weight: bolder;
   text-align: center;
   padding: 10px 0;
   position: fixed;
