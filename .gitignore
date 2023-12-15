@@ -6,13 +6,7 @@
 .pnp.js
 
 # omat
-/components/decor.js
-/components/trees.js
-/components/costumes.js
-/components/node_modules
-/components/.env
-/components/package.json.js
-/components/package-lock.json.js
+
 
 
 # testing
