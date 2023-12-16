@@ -7,12 +7,25 @@ import { useParams } from 'react-router-dom';
 
 
 
+
+
 const CardCollection = () => {
   const [products, setProducts] = useState([]);
   const [quantities, setQuantities] = useState({});
+ 
+  
+  useEffect(() => {
+    // Set default quantity value for each product
+    const defaultQuantities = {};
+    products.forEach((product) => {
+      defaultQuantities[product.id] = 1;
+    });
+    setQuantities(defaultQuantities);
+  }, [products]);
+
 
   const {category} = useParams();
-  console.log(category);
+  
 
   useEffect(() => {
     // Fetch products when the component mounts
@@ -27,10 +40,12 @@ const CardCollection = () => {
       .catch(error => console.error(error));
   }, []);
 
-  function AddToCart(product, quantity){
+  function AddToCart(product){
+    
+    const quantity = quantities[product.id] || 1;
     const prod = cartSignal.value.find( p => p.id === product.id );
     if( prod ){
-        prod.count++;
+        prod.count += quantity;
         cartSignal.value = [...cartSignal.value];
     }else{
         cartSignal.value = [...cartSignal.value, {...product, count: quantity}];
@@ -40,7 +55,7 @@ const CardCollection = () => {
 function handleDecrement(product) {
   setQuantities(prevQuantities => ({
     ...prevQuantities,
-    [product.id]: Math.max((prevQuantities[product.id] || 0) - 1, 0)
+    [product.id]: Math.max((prevQuantities[product.id] || 1) - 1, 1)
   }));
 }
 
@@ -51,13 +66,26 @@ function handleIncrement(product) {
   }));
 }
 
+function handleChange(event, product) {
+  const newValue = event.target.value;
+  setQuantities(prevQuantities => ({
+    ...prevQuantities,
+    [product.id]: Number(newValue) || 0
+  }));
+}
+
+function handleClearField(product) {
+  
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [product.id]: '',
+    }));
+  }
 
 
 
-	/*const [value, setValue] = useState(1);
-  const handleDecrement = () => {
-    setValue((prevValue) => (prevValue > 1 ? prevValue - 1 : 1));
-  };*/
+
+
 
 
 
@@ -67,23 +95,39 @@ function handleIncrement(product) {
       {products.map((product, index) => (
         <div key={index} className="card">
           <h2>{product.productName}</h2>
-          <p>{product.price}</p>
+          <p>{product.price}€</p>
           
-          <Button onClick={() => AddToCart(product, quantities[product.id] || 1)} label="Add to cart" /> 
-          <button onClick={() => handleDecrement(product)}>-</button>
+          <Button onClick={() => AddToCart(product)} label="Add to cart" /> 
+          <div className="card-buttons">
+          <button className='cartButton' onClick={() => handleDecrement(product)}>-</button>
           <form>
-            <input value={quantities[product.id] || 1} readOnly></input>
+            <input 
+            class="amountForm"
+            type="number"
+            value={quantities[product.id] || ''}
+            onChange={(event) => handleChange(event, product)}
+            onKeyDown={(event) => {
+              if (event.key === 'Backspace') {
+                event.preventDefault();
+                handleClearField(product);
+              }
+            }} 
+            />
           </form>
-			    <button onClick={() => handleIncrement(product)}>+</button>
-  
+			    <button className='cartButton' onClick={() => handleIncrement(product)}>+</button>
+            </div>
           
           
         </div>
       ))}
+
+    
+
     </div>
 
 
+
   );
-      }
+}
 
 export default CardCollection;
