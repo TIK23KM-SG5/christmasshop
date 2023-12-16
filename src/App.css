@@ -23,7 +23,7 @@ body {
 
 .navbar-brand {
   text-decoration: none;
-  color:  red;
+  color:  rgb(0, 0, 0);
   font-weight: bolder;
 }
 
@@ -37,15 +37,37 @@ body {
 .navbar-link {
   margin-left: 10px;
   text-decoration: none;
-  color: red;
+  color: rgb(0, 0, 0);
 }
 
 .hero-section {
-  border: 20px groove  rgb(116, 56, 56);
+  position: relative;
+  
   padding: 0px 0;
   text-align: center;
   background-image: url(../public/app_background.png);
   background-size: 105%;
+}
+
+.hero-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.75); /* Läpikuultava harmaa */
+  z-index: 1; /* Varmista, että maski on taustakuvan päällä */
+}
+
+.hero-section p {
+  position: relative;
+  z-index: 2; /* Varmistetaan, että teksti on päällimmäisenä */
+}
+
+.hero-section h1 {
+  position: relative;
+  z-index: 2; /* Varmistetaan, että teksti on päällimmäisenä */
 }
 
 .hero-content {
@@ -78,4 +100,6 @@ body {
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 2;
+  
 }
