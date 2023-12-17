@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { cartSignal } from "../signals";
 import { useParams } from 'react-router-dom';
-
+import Button from '../uicomp/button'
 
 
 
