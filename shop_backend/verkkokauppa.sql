@@ -51,7 +51,6 @@ INSERT INTO product_category VALUES
 
 
 INSERT INTO product (product_name, price, image_url, category) VALUES 
-('Green Christmas Tree', '49.90', NULL, 'Trees'),('Red Christmas Tree', '49.90', NULL, 'Trees'), ('White Christmas Tree', '49.90', NULL, 'Trees'),
-('Classic Santa costume', '29.90', NULL, 'Costumes'), ('Grinch Santa costume', '29.90', NULL, 'Costumes'), ('Christmas Elf costume', '29.90', NULL, 'Costumes'), 
-('Wrapping paper', '4.90', NULL, 'Decor'),('Wrapping string', '4.90', NULL, 'Decor'), ('Gift bag', '4.90', NULL, 'Decor')
-
+('Green Christmas Tree', '49.90', 'images/trees/green_christmas_tree.jpg', 'Trees'),('Red Christmas Tree', '49.90', 'images/trees/red_christmas_tree.jpg', 'Trees'), ('White Christmas Tree', '49.90', 'images/trees/white_christmas_tree.jpg', 'Trees'),
+('Classic Santa costume', '29.90', 'images/costumes/santa_costume.jpg', 'Costumes'), ('Grinch Santa costume', '29.90', 'images/costumes/santa_costume.jpg', 'Costumes'), ('Christmas Elf costume', '29.90', 'images/costumes/elf_costumers.jpg', 'Costumes'), 
+('Wrapping paper', '4.90', 'images/decor/wrapping_paper.jpg', 'Decor'),('Wrapping string', '4.90', 'images/decor/wrapping_string.jpg', 'Decor'), ('Gift bag', '4.90', 'images/decor/gift_bag.jpg', 'Decor')
