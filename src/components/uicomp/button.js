@@ -8,12 +8,9 @@ const Button = ({ label, onClick, className }) => {
     padding: '10px 15px',
     fontSize: '16px',
     cursor: 'pointer',
-    // You can add more styles based on the class
     ...(className === 'primary' && {
-      backgroundColor: '#007bff',
-      color: '#fff',
+      backgroundColor: 'transparent',
     }),
-    // Add more class-based styles as needed
   };
 
   return (

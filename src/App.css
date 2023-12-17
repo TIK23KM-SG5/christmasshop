@@ -18,13 +18,20 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+<<<<<<< Updated upstream
   border: 1px solid #000;
+=======
+>>>>>>> Stashed changes
 }
 
 .navbar-brand {
   text-decoration: none;
+<<<<<<< Updated upstream
   color: black;
   font-weight: bold;
+=======
+  font-weight: bolder;
+>>>>>>> Stashed changes
 }
 
 .navbar-links {
@@ -33,10 +40,65 @@ body {
   align-items: center;
 }
 
+<<<<<<< Updated upstream
 .navbar-link {
   margin-left: 10px;
   text-decoration: none;
   color: black;
+=======
+.nav-item:hover {
+  background-color: #f0f0f0;
+}
+
+.user-wrapper {
+  min-width: 124px;
+}
+
+.dropdown-wrapper {
+  position: fixed;
+  top: 34px;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  border: 1px solid #000;
+  background: #fff;
+}
+
+.icon {
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  border: 1px solid #000;
+  padding: 2px;
+  margin: 2px;
+  @media (max-width: 768px) {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.default-user-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.logo-icon,
+.shopping-cart-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  margin: 2px;
+  @media (max-width: 768px) {
+    border-radius: 4px;
+  }
+}
+
+.icon-image {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+>>>>>>> Stashed changes
 }
 
 .hero-section {
@@ -53,6 +115,7 @@ body {
 .card-collection {
   display: flex;
   flex-wrap: wrap;
+<<<<<<< Updated upstream
   justify-content: space-around;
   margin: 4px;
 }
@@ -63,6 +126,29 @@ body {
   text-align: center;
   flex: 0 1 calc(20% - 8px); /* 20% width with some margin */
   margin: 4px;
+=======
+  justify-content: space-between;
+  margin-bottom: 80px;
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.card {
+  border: 1px solid  #fff;
+  background-color: #fcfcfc;
+  padding: 20px;
+  text-align: center;
+  flex: 0 1 30%;
+  width: 30%;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  @media (max-width: 768px) {
+    flex: 0 1 35%;
+    width: 35%;
+    margin-bottom: 12px;
+  }
+>>>>>>> Stashed changes
 }
 
 .footer {
@@ -74,4 +160,24 @@ body {
   position: fixed;
   bottom: 0;
   width: 100%;
+<<<<<<< Updated upstream
+=======
+  height: 4%;
+
+}
+
+.search-bar {
+  padding-left: 4px;
+  min-width: 256px;
+  @media (max-width: 768px) {
+    min-width: 176px;
+  }
+}
+
+.search-input {
+  border-radius: 20px;
+  border: 1px solid #000;
+  height: 24px;
+  width: 100%;
+>>>>>>> Stashed changes
 }

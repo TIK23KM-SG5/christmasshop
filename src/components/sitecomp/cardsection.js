@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Button from '../uicomp/button';
 import { cartSignal } from "../signals";
 import { useParams } from 'react-router-dom';
 
@@ -40,8 +39,19 @@ const CardCollection = () => {
         <div key={index} className="card">
           <h2>{product.productName}</h2>
           <p>{product.price}</p>
+<<<<<<< Updated upstream
           
           <Button onClick={() => AddToCart(product)} label="Add to cart" />
+=======
+          <button onClick={() => AddToCart(product, quantities[product.id] || 1)} label="Add to cart" /> 
+          <button onClick={() => handleDecrement(product)}>-</button>
+          <form>
+            <input value={quantities[product.id] || 1} readOnly></input>
+          </form>
+			    <button onClick={() => handleIncrement(product)}>+</button>
+  
+          
+>>>>>>> Stashed changes
           
         </div>
       ))}
