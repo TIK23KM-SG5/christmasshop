@@ -18,6 +18,9 @@ const NavigationBar = () => {
           <Link to="/products" className='navbar-brand'>
             Products
           </Link>
+          <Link to ="/special" className='navbar-brand'>
+            Special FAQ
+          </Link>
           <div className="navbar-links">
             <Link to="/auth" className="navbar-link">
               Authorization

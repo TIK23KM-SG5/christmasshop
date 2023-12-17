@@ -5,7 +5,7 @@ body {
 }
 
 .app-container {
-  border: 1px solid  red;
+  border: 1px solid red;
 }
 
 .navbar-container {
@@ -18,12 +18,12 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border: 1px solid  red;
+  border: 1px solid red;
 }
 
 .navbar-brand {
   text-decoration: none;
-  color:  red;
+  color: red;
   font-weight: bolder;
 }
 
@@ -41,11 +41,12 @@ body {
 }
 
 .hero-section {
-  border: 20px groove  rgb(116, 56, 56);
+  border: 20px groove rgb(116, 56, 56);
   padding: 0px 0;
   text-align: center;
   background-image: url(../public/app_background.png);
-  background-size: 105%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .hero-content {
@@ -58,14 +59,19 @@ body {
   flex-wrap: wrap;
   justify-content: space-around;
   margin: 4px;
+  background-image: url(../public/app_background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .card {
-  border: 1px solid  red;
-  padding: 20px;
-  text-align: center;
-  flex: 0 1 calc(20% - 8px); /* 20% width with some margin */
+  border: 1px solid red;
+  padding: 50px;
+  text-align: left;
+  flex: 0 1 calc(20% - 8px);
+  /* 20% width with some margin */
   margin: 4px;
+  background-color: rgba(248, 165, 101, 0.184);
 }
 
 .footer {
@@ -79,3 +85,4 @@ body {
   bottom: 0;
   width: 100%;
 }
+
