@@ -9,7 +9,6 @@ const CardCollection = () => {
   const [products, setProducts] = useState([]);
 
   const {category} = useParams();
-  console.log(category);
 
   useEffect(() => {
     // Fetch products when the component mounts
@@ -22,7 +21,7 @@ const CardCollection = () => {
     axios.get(url)
       .then(response => setProducts(response.data))
       .catch(error => console.error(error));
-  }, []);
+  }, [category]);
 
   function AddToCart(product){
     const prod = cartSignal.value.find( p => p.id === product.id );
