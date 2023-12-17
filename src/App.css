@@ -18,12 +18,12 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border: 1px solid #000;
+  border: 1px solid red;
 }
 
 .navbar-brand {
   text-decoration: none;
-  color: black;
+  color: rgb(0, 0, 0);
   font-weight: bolder;
 }
 
@@ -37,6 +37,13 @@ body {
 .navbar-link {
   margin-left: 10px;
   text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+
+.hero-section {
+  position: relative;
+}
+
 .nav-item:hover {
   background-color: #f0f0f0;
 }
@@ -100,6 +107,31 @@ body {
   background-size: cover;
 }
 
+.hero-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.75);
+  /* Translucent gray */
+  z-index: 1;
+  /* Ensure that the overlay is on top of the background image */
+}
+
+.hero-section p {
+  position: relative;
+  z-index: 2;
+  /* Ensuring that the text remains on top */
+}
+
+.hero-section h1 {
+  position: relative;
+  z-index: 2;
+  /* Ensuring that the text remains on top */
+}
+
 .hero-content {
   max-width: 800px;
   margin: auto;
@@ -141,7 +173,6 @@ body {
     flex: 0 1 35%;
     width: 35%;
     margin-bottom: 12px;
-  }
 }
 
 .footer {
@@ -154,6 +185,7 @@ body {
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 2;
   height: 4%;
 
 }
