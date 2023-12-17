@@ -7,7 +7,7 @@ body {
 }
 
 .app-container {
-  border: 1px solid black;
+  border: 1px solid  red;
 }
 
 .page-content {
@@ -42,14 +42,14 @@ body {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
+  padding: 10px;
+  border: 1px solid  red;
 }
 
-.accordion-wrapper {
-  position: fixed;
-  top: 34px;
-  left: -4px;
-  width: 100%;
-  z-index: 999;
+.navbar-brand {
+  text-decoration: none;
+  color:  red;
+  font-weight: bolder;
 }
 
 .mobile-left-wrapper {
@@ -102,6 +102,7 @@ body {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
+  font-weight: bolder;
 }
 
 .nav-item:hover {
@@ -175,8 +176,8 @@ body {
 }
 
 .card {
-  border: 1px solid black;
-  padding: 10px;
+  border: 1px solid  red;
+  padding: 20px;
   text-align: center;
   flex: 0 1 30%;
   width: 30%;
@@ -190,8 +191,10 @@ body {
 }
 
 .footer {
-  border: 1px solid black;
-  background-color: #eee5dd;
+  background-color: #f0cfcf;
+  background: transparent;
+  color: rgb(19, 2, 2);
+  font-weight: bolder;
   text-align: center;
   bottom: 0;
   width: 100%;
