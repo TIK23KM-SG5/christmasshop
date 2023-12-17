@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Button from '../uicomp/button';
 import { cartSignal } from "../signals";
 import { useParams } from 'react-router-dom';
 
@@ -116,7 +115,6 @@ function handleClearField(product) {
           </form>
 			    <button className='cartButton' onClick={() => handleIncrement(product)}>+</button>
             </div>
-          
           
         </div>
       ))}
