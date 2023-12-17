@@ -23,7 +23,7 @@ const NavigationBar = () => {
           </Link>
           <div className="navbar-links">
             <Link to="/auth" className="navbar-link">
-              Authorization
+              Sign in
             </Link>
             <Link to="/cart" className="navbar-link">
               Shopping cart
