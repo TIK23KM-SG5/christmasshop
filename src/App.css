@@ -42,10 +42,69 @@ body {
 
 .hero-section {
   position: relative;
+}
+
+.nav-item:hover {
+  background-color: #f0f0f0;
+}
+
+.user-wrapper {
+  min-width: 124px;
+}
+
+.dropdown-wrapper {
+  position: fixed;
+  top: 34px;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  border: 1px solid #000;
+  background: #fff;
+}
+
+.icon {
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  border: 1px solid #000;
+  padding: 2px;
+  margin: 2px;
+  @media (max-width: 768px) {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.default-user-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.logo-icon,
+.shopping-cart-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  margin: 2px;
+  @media (max-width: 768px) {
+    border-radius: 4px;
+  }
+}
+
+.icon-image {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.hero-section {
+  border: 20px groove rgb(116, 56, 56);
   padding: 0px 0;
   text-align: center;
   background-image: url(../public/app_background.png);
-  background-size: 105%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .hero-section::after {
@@ -83,15 +142,37 @@ body {
   flex-wrap: wrap;
   justify-content: space-around;
   margin: 4px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .card {
   border: 1px solid red;
-  padding: 20px;
-  text-align: center;
+  padding: 50px;
+  text-align: left;
   flex: 0 1 calc(20% - 8px);
   /* 20% width with some margin */
   margin: 4px;
+  justify-content: space-between;
+  margin-bottom: 80px;
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.card {
+  border: 1px solid  #fff;
+  background-color: #fcfcfc;
+  padding: 20px;
+  text-align: center;
+  flex: 0 1 30%;
+  width: 30%;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  @media (max-width: 768px) {
+    flex: 0 1 35%;
+    width: 35%;
+    margin-bottom: 12px;
 }
 
 .footer {
@@ -105,5 +186,77 @@ body {
   bottom: 0;
   width: 100%;
   z-index: 2;
+  height: 4%;
 
+}
+
+.search-bar {
+  padding-left: 4px;
+  min-width: 256px;
+  @media (max-width: 768px) {
+    min-width: 176px;
+  }
+}
+
+.search-input {
+  border-radius: 20px;
+  border: 1px solid #000;
+  height: 24px;
+  width: 100%;
+}
+
+
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.cartButton {
+	background-color:#ffffff;
+	border:1px solid #000000;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Verdana;
+	font-size:17px;
+	font-weight:bold;
+	padding:3px 4px;
+	text-decoration:none;
+  width: 30px;
+  height: 30px;
+}
+
+.cartButton:hover {
+  background-color: #e2e2e2;
+}
+
+.cartButton:active {
+	position:relative;
+	top:1px;
+}
+
+.amountForm { 
+  width: 30px;
+  height: 24px;
+  text-align: center;
+  margin-left: 4px;
+  margin-right: 4px
+}
+
+.card-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 4px;
+}
+
+.cartTable {
+  margin-left: auto;
+  margin-right: auto;
 }
