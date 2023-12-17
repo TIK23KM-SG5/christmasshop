@@ -11,8 +11,8 @@ import Button from '../uicomp/button'
 const CardCollection = () => {
   const [products, setProducts] = useState([]);
   const [quantities, setQuantities] = useState({});
- 
-  
+
+
   useEffect(() => {
     // Set default quantity value for each product
     const defaultQuantities = {};
@@ -23,14 +23,14 @@ const CardCollection = () => {
   }, [products]);
 
 
-  const {category} = useParams();
-  
+  const { category } = useParams();
+
 
   useEffect(() => {
     // Fetch products when the component mounts
     let url = 'http://localhost:3001/products';
 
-    if(category) {
+    if (category) {
       url = url + '?category=' + category;
     }
 
@@ -39,42 +39,42 @@ const CardCollection = () => {
       .catch(error => console.error(error));
   }, []);
 
-  function AddToCart(product){
-    
+  function AddToCart(product) {
+
     const quantity = quantities[product.id] || 1;
-    const prod = cartSignal.value.find( p => p.id === product.id );
-    if( prod ){
-        prod.count += quantity;
-        cartSignal.value = [...cartSignal.value];
-    }else{
-        cartSignal.value = [...cartSignal.value, {...product, count: quantity}];
+    const prod = cartSignal.value.find(p => p.id === product.id);
+    if (prod) {
+      prod.count += quantity;
+      cartSignal.value = [...cartSignal.value];
+    } else {
+      cartSignal.value = [...cartSignal.value, { ...product, count: quantity }];
     }
-};
+  };
 
-function handleDecrement(product) {
-  setQuantities(prevQuantities => ({
-    ...prevQuantities,
-    [product.id]: Math.max((prevQuantities[product.id] || 1) - 1, 1)
-  }));
-}
+  function handleDecrement(product) {
+    setQuantities(prevQuantities => ({
+      ...prevQuantities,
+      [product.id]: Math.max((prevQuantities[product.id] || 1) - 1, 1)
+    }));
+  }
 
-function handleIncrement(product) {
-  setQuantities(prevQuantities => ({
-    ...prevQuantities,
-    [product.id]: (prevQuantities[product.id] || 0) + 1
-  }));
-}
+  function handleIncrement(product) {
+    setQuantities(prevQuantities => ({
+      ...prevQuantities,
+      [product.id]: (prevQuantities[product.id] || 0) + 1
+    }));
+  }
 
-function handleChange(event, product) {
-  const newValue = event.target.value;
-  setQuantities(prevQuantities => ({
-    ...prevQuantities,
-    [product.id]: Number(newValue) || 0
-  }));
-}
+  function handleChange(event, product) {
+    const newValue = event.target.value;
+    setQuantities(prevQuantities => ({
+      ...prevQuantities,
+      [product.id]: Number(newValue) || 0
+    }));
+  }
 
-function handleClearField(product) {
-  
+  function handleClearField(product) {
+
     setQuantities((prevQuantities) => ({
       ...prevQuantities,
       [product.id]: '',
@@ -87,39 +87,40 @@ function handleClearField(product) {
 
 
 
-
+  const baseUrl = process.env.PUBLIC_URL || '';
 
   return (
     <div className="card-collection">
       {products.map((product, index) => (
         <div key={index} className="card">
           <h2>{product.productName}</h2>
+          <img src={baseUrl + '/' + product.imageUrl} alt={product.productName} />
           <p>{product.price}€</p>
-          
-          <Button onClick={() => AddToCart(product)} label="Add to cart" /> 
+
+          <Button onClick={() => AddToCart(product)} label="Add to cart" />
           <div className="card-buttons">
-          <button className='cartButton' onClick={() => handleDecrement(product)}>-</button>
-          <form>
-            <input 
-            class="amountForm"
-            type="number"
-            value={quantities[product.id] || ''}
-            onChange={(event) => handleChange(event, product)}
-            onKeyDown={(event) => {
-              if (event.key === 'Backspace') {
-                event.preventDefault();
-                handleClearField(product);
-              }
-            }} 
-            />
-          </form>
-			    <button className='cartButton' onClick={() => handleIncrement(product)}>+</button>
-            </div>
-          
+            <button className='cartButton' onClick={() => handleDecrement(product)}>-</button>
+            <form>
+              <input
+                class="amountForm"
+                type="number"
+                value={quantities[product.id] || ''}
+                onChange={(event) => handleChange(event, product)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Backspace') {
+                    event.preventDefault();
+                    handleClearField(product);
+                  }
+                }}
+              />
+            </form>
+            <button className='cartButton' onClick={() => handleIncrement(product)}>+</button>
+          </div>
+
         </div>
       ))}
 
-    
+
 
     </div>
 
