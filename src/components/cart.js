@@ -59,10 +59,16 @@ export const Cart = () => {
 
     return (
         <div>
-          <h2>Products in the cart</h2>
-          <button onClick={() => (cartSignal.value = [])}>Empty cart</button>
-          <table>
+            {cartSignal.value.length === 0 ? (
+              <p>Shopping cart is empty</p>
+            ) : (
+            <table className='cartTable'>
             <thead>
+              <tr>
+                <td>
+                <h2>Products in the cart</h2>
+                </td>
+              </tr>
               <tr>
                 <th>Product</th>
                 <th>Quantity</th>
@@ -78,7 +84,7 @@ export const Cart = () => {
                     {product.productName}
                   </td>
                   <td>
-                  <button className='cartButton' onClick={() => removeFromCart(product)}>-</button>
+                    <button className='cartButton' onClick={() => removeFromCart(product)}>-</button>
                     {product.count}
                     <button className='cartButton' onClick={() => AddToCart(product)}>+</button>
                   </td>
@@ -101,10 +107,16 @@ export const Cart = () => {
                 </td>
                 <td></td>
               </tr>
+              <tr>
+                <td>
+                <button onClick={handleCheckout}>Checkout</button> <button onClick={() => (cartSignal.value = [])}>Empty cart</button>
+                </td>
+              </tr>
             </tfoot>
           </table>
+          )}
           <div>
-        <button onClick={handleCheckout}>Checkout</button>
+        
       </div>
 
       {/* Render the OrderModal component */}
