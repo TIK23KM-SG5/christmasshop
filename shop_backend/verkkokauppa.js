@@ -82,11 +82,11 @@ app.get('/categories', async (req, res) => {
 app.get('/customer', async(req,res) => {
 
     //Get the bearer token from authorization header
-    const token = req.headers.authorization.split(' ')[1];
+    const token = req.headers.authorization?.split(' ')[1];
 
     //Verify the token. Verified token contains username
     try{
-        const username = jwt.verify(token, 'mysecretkey').username;
+        const username = jwt.verify(token, process.env.JWT_KEY).username;
         const connection = await mysql.createConnection(conf);
         const [rows] = await connection.execute('SELECT first_name fname, last_name lname, username FROM customer WHERE username=?',[username]);
         res.status(200).json(rows[0]);
@@ -152,31 +152,54 @@ app.post('/products', async (req, res) => {
  * Place an order. 
  */
 app.post('/order', async (req, res) => {
-
     let connection;
-
+  
     try {
-        connection = await mysql.createConnection(conf);
-        connection.beginTransaction();
-
-        const order = req.body;
-        
-        const [info] = await connection.execute("INSERT INTO customer_order (order_date, customer_id) VALUES (NOW(),?)",[order.customerId]);
-        
-        const orderId = info.insertId;
-
-        for (const product of order.products) {
-            await connection.execute("INSERT INTO order_line (order_id, product_id, quantity) VALUES (?,?,?)",[orderId, product.id, product.quantity]);            
-        }
-
-        connection.commit();
-        res.status(200).json({orderId: orderId});
-
-    } catch (err) {
-        connection.rollback();
-        res.status(500).json({ error: err.message });
+      connection = await mysql.createConnection(conf);
+      connection.beginTransaction();
+  
+      const order = req.body;
+  
+      const token = req.headers.authorization.split(' ')[1];
+  
+      // Get the customerId from the token
+      const decodedToken = jwt.verify(token, process.env.JWT_KEY);
+      const customerId = decodedToken.customerId;
+  
+      const [info] = await connection.execute("INSERT INTO customer_order (order_date, customer_id) VALUES (NOW(),?)", [customerId]);
+  
+      const orderId = info.insertId;
+  
+      for (const product of order.products) {
+        console.log('Debugging: Product:', product);
+        //console.log('Debugging: Products array:', order.products);
+        //console.log('Debugging: Order object:', order);
+        console.log('Debugging: Values to be inserted into order_line:', orderId, product.id, product.count);
+        if (product.id !== undefined && product.count !== undefined) {
+        await connection.execute("INSERT INTO order_line (order_id, product_id, quantity) VALUES (?,?,?)", [orderId, product.id, product.count]);
+      } else {
+        console.error('Error: productId or quantity is undefined for a product in the order.');
+      }
     }
-});
+  
+      connection.commit();
+      res.status(200).json({ orderId: orderId });
+  
+    } catch (err) {
+      console.error('Error in /order endpoint:', err); // Log the error for debugging
+  
+      if (connection) {
+        connection.rollback();
+      }
+  
+      res.status(500).json({ error: 'Failed to create order' });
+    } finally {
+      if (connection) {
+        connection.end(); // Close the database connection
+      }
+    }
+  });
+  
 
 
 //(Authentication/JWT could be done with middleware also)
@@ -213,25 +236,30 @@ app.post('/register', upload.none(), async (req,res) => {
 app.post('/login', upload.none(), async (req, res) => {
     const uname = req.body.username;
     const pw = req.body.pw;
-
+    console.log('Received Password:', pw);
 
     try {
         const connection = await mysql.createConnection(conf);
 
-        const [rows] = await connection.execute('SELECT pw FROM customer WHERE username=?', [uname]);
+        const [rows] = await connection.execute('SELECT id, pw FROM customer WHERE username=?', [uname]);
 
-        if(rows.length > 0){
+        if (rows.length > 0) {
             const isAuth = await bcrypt.compare(pw, rows[0].pw);
-            if(isAuth){
-                const token = jwt.sign({username: uname}, 'mysecretkey');
-                res.status(200).json({jwtToken: token});
-            }else{
+
+            if (isAuth) {
+                const customerId = rows[0].id; // Retrieve the customer ID
+                console.log('Customer ID:', customerId);
+
+                // Include customerId in the JWT payload
+                const token = jwt.sign({ username: uname, customerId: customerId }, process.env.JWT_KEY);
+
+                res.status(200).json({ jwtToken: token });
+            } else {
                 res.status(401).end('User not authorized');
             }
-        }else{
+        } else {
             res.status(404).send('User not found');
         }
-
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -244,11 +272,11 @@ app.post('/login', upload.none(), async (req, res) => {
 app.get('/orders', async (req,res) => {
     
     //Get the bearer token from authorization header
-    const token = req.headers.authorization.split(' ')[1];
+    const token = req.headers.authorization?.split(' ')[1];
 
     //Verify the token. Verified token contains username
     try{
-        const username = jwt.verify(token, 'mysecretkey').username;
+        const username = jwt.verify(token, process.env.JWT_KEY).username;
         const orders = await getOrders(username);
         res.status(200).json(orders);
     }catch(err){

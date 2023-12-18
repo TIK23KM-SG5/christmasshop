@@ -2,9 +2,10 @@
 import React from 'react';
 import Modal from 'react-modal';
 
+
 Modal.setAppElement('#root'); // Set the root element for accessibility
 
-const OrderModal = ({ isOpen, closeModal, orderDetails }) => {
+const OrderModal = ({ isOpen, closeModal, orderDetails, onSubmitOrder }) => {
     const customStyles = {
         content: {
           width: '40%', // Adjust the width as needed
@@ -17,6 +18,20 @@ const OrderModal = ({ isOpen, closeModal, orderDetails }) => {
    // Calculate total price for each product and overall total
    const totalForProduct = (product) => product.price * product.count;
    const overallTotal = orderDetails.reduce((total, product) => total + totalForProduct(product), 0);
+
+   // Function to handle order submission
+  const handleOrderSubmission = async () => {
+    try {
+      // Call the onSubmitOrder callback with the order details
+      await onSubmitOrder(orderDetails);
+
+      // Close the modal after successful submission
+      closeModal();
+    } catch (error) {
+      console.error('Error submitting order:', error);
+      // Handle errors as needed
+    }
+  };
  
    return (
     <Modal
@@ -48,6 +63,7 @@ const OrderModal = ({ isOpen, closeModal, orderDetails }) => {
         <b>Overall Total: {overallTotal.toFixed(2)}€</b>
       </p>
       <button onClick={closeModal}>Continue shopping</button>
+      <button onClick={handleOrderSubmission}>Submit order</button>
     </Modal>
       );
     };

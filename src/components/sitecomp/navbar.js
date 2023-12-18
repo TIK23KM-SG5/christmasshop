@@ -22,7 +22,10 @@ const NavigationBar = () => {
             Special FAQ
           </Link>
           <div className="navbar-links">
-            <Link to="/auth" className="navbar-link">
+          <Link to="/register" className="navbar-link">
+              Register
+            </Link>
+            <Link to="/login" className="navbar-link">
               Sign in
             </Link>
             <Link to="/cart" className="navbar-link">

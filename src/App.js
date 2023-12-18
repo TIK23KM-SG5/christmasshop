@@ -9,6 +9,8 @@ import { Products } from './components/products';
 import { Categories } from './components/categories';
 import CardCollection from './components/sitecomp/cardsection';
 import Special from './components/special';
+import Register from './components/register';
+
 
 function App() {
   return (
@@ -17,12 +19,13 @@ function App() {
         <NavigationBar />
         <Routes>
           <Route path='/' element={<HeroSection />} />
-          <Route path='/auth' element={<AuthorizationExample />} />
+          <Route path='/login' element={<AuthorizationExample />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/products/:category' element={<Products />} />
           <Route path='/products' element={<CardCollection />} />
           <Route path='/categories' element={<Categories />} />
           <Route path='/special' element={<Special />} />
+          <Route path='/register' element={<Register />} />
         </Routes>
         <Footer />
       </div>

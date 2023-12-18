@@ -1,20 +1,83 @@
 import React, { useState } from 'react'
 import { cartSignal } from './signals';
-import OrderModal from './checkout_modal'; 
+import OrderModal from './checkout_modal';
 import Button from './uicomp/button'
+import { jwtToken } from './Signals/TokenSignal';
 
 
 export const Cart = () => {
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const handleCheckout = () => {
-    setIsModalOpen(true);
-  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  const submitOrderToBackend = async (orderDetails) => {
+    try {
+      const authToken = jwtToken.value;
+
+        // Decode the JWT token to get the customer ID
+         const decodedToken = decodeToken(authToken);
+
+        // Check if decoding was successful and the customer ID is available
+        if (!decodedToken || !decodedToken.customerId) {
+        throw new Error('Customer ID not found in the token');
+        }
+         const customerId = decodedToken ? decodedToken.customerId : null;
+   
+
+      // Make a request to your backend to create the order
+      const response = await fetch('http://localhost:3001/order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`, // Include your authorization token
+        },
+        body: JSON.stringify({
+          customerId: customerId, // Use the customer ID obtained from the token
+          products: orderDetails,
+        }), // Send order details in the request body
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create order');
+      }
+
+      // Handle the response as needed
+      const data = await response.json();
+      console.log('Order created successfully:', data);
+    } catch (error) {
+      console.error('Error creating order:', error);
+      // Handle errors as needed
+      throw error; // Propagate the error to the calling component if necessary
+    }
+  };
+
+    // Function to decode the JWT token
+    const decodeToken = (token) => {
+      try {
+        if (!token) {
+          console.error('Token is null or undefined');
+          return null;
+        }
+
+        const [, payloadBase64] = token.split('.'); // Extract the payload part
+        const decodedString = window.atob(payloadBase64);
+        const decodedObject = JSON.parse(decodedString);
+        console.log('Decoded Token:', decodedObject);
+        return decodedObject;
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        return null;
+      }
+    };
+
+    const handleCheckout = () => {
+      setIsModalOpen(true);
+    };
+
+
       // Removes product amount by 1 from cart and stops to 1
     const removeFromCart = (product) => {
         const updatedCart = cartSignal.value.map(p => ({ ...p })); // Create a new array with cloned objects
@@ -124,13 +187,13 @@ export const Cart = () => {
         isOpen={isModalOpen}
         closeModal={closeModal}
         orderDetails={cartSignal.value}
+        onSubmitOrder={submitOrderToBackend}
       />
         </div>
       );
+        
       
 
 
         
-
-        }
-    
+}
