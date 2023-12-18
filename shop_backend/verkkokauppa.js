@@ -171,10 +171,10 @@ app.post('/order', async (req, res) => {
       const orderId = info.insertId;
   
       for (const product of order.products) {
-        console.log('Debugging: Product:', product);
+        //console.log('Debugging: Product:', product);
         //console.log('Debugging: Products array:', order.products);
         //console.log('Debugging: Order object:', order);
-        console.log('Debugging: Values to be inserted into order_line:', orderId, product.id, product.count);
+        //console.log('Debugging: Values to be inserted into order_line:', orderId, product.id, product.count);
         if (product.id !== undefined && product.count !== undefined) {
         await connection.execute("INSERT INTO order_line (order_id, product_id, quantity) VALUES (?,?,?)", [orderId, product.id, product.count]);
       } else {
@@ -236,7 +236,7 @@ app.post('/register', upload.none(), async (req,res) => {
 app.post('/login', upload.none(), async (req, res) => {
     const uname = req.body.username;
     const pw = req.body.pw;
-    console.log('Received Password:', pw);
+    //console.log('Received Password:', pw);
 
     try {
         const connection = await mysql.createConnection(conf);
@@ -248,7 +248,7 @@ app.post('/login', upload.none(), async (req, res) => {
 
             if (isAuth) {
                 const customerId = rows[0].id; // Retrieve the customer ID
-                console.log('Customer ID:', customerId);
+                //console.log('Customer ID:', customerId);
 
                 // Include customerId in the JWT payload
                 const token = jwt.sign({ username: uname, customerId: customerId }, process.env.JWT_KEY);

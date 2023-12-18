@@ -37,7 +37,7 @@ const CardCollection = () => {
     axios.get(url)
       .then(response => setProducts(response.data))
       .catch(error => console.error(error));
-  }, []);
+  }, [category]);
 
   function AddToCart(product) {
 

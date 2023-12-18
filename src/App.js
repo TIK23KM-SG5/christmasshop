@@ -9,7 +9,7 @@ import { Products } from './components/products';
 import { Categories } from './components/categories';
 import CardCollection from './components/sitecomp/cardsection';
 import Special from './components/special';
-import Register from './components/register';
+
 
 
 function App() {
@@ -25,11 +25,10 @@ function App() {
           <Route path='/products' element={<CardCollection />} />
           <Route path='/categories' element={<Categories />} />
           <Route path='/special' element={<Special />} />
-          <Route path='/register' element={<Register />} />
         </Routes>
         <Footer />
       </div>
-    
+
   );
 }
 
