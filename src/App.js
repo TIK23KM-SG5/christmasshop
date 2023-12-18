@@ -21,7 +21,6 @@ function App() {
           <Route path='/categories' element={<Categories />} />
           <Route path='/special' element={<Special />} />
         </Routes>
-        <Footer />
       </div>
     
   );
