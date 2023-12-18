@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AuthorizationExample from './components/AuthorizationExample';
 import NavigationBar from './components/sitecomp/navbar';
-import { HeroSection } from './components/sitecomp/herosection';
+import HeroSection from './components/sitecomp/herosection';
 import Footer from './components/sitecomp/footer';
 import CardCollection from './components/sitecomp/cardsection';
 import Special from './components/special';
