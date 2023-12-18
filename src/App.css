@@ -7,7 +7,7 @@ body {
 }
 
 .app-container {
-  border: 1px solid  red;
+  border: 1px solid red;
 }
 
 .page-content {
@@ -43,12 +43,12 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border: 1px solid  red;
+  border: 1px solid red;
 }
 
 .navbar-brand {
   text-decoration: none;
-  color:  red;
+  color: rgb(0, 0, 0);
   font-weight: bolder;
 }
 
@@ -105,61 +105,18 @@ body {
   font-weight: bolder;
 }
 
-.nav-item:hover {
-  background-color: #f0f0f0;
-}
-
-.dropdown-wrapper {
-  position: fixed;
-  top: 34px;
-  left: 0;
-  width: 100%;
-  z-index: 999;
-  border: 1px solid #000;
-  background: #fff;
-}
-
-.icon {
-  cursor: pointer;
-  overflow: hidden;
-  transition: transform 0.3s ease;
-  border: 1px solid #000;
-  padding: 2px;
-  @media (max-width: 768px) {
-    width: 30px;
-    height: 30px;
-  }
-}
-
-.default-user-icon {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-}
-
-.logo-icon,
-.shopping-cart-icon {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  margin: 2px;
-  @media (max-width: 768px) {
-    border-radius: 4px;
-  }
-}
-
-.icon-image {
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
+.navbar-link {
+  margin-left: 10px;
+  text-decoration: none;
+  color: red;
 }
 
 .hero-section {
-  border: 1px solid black;
-  padding: 4px;
+  border: 20px groove  rgb(116, 56, 56);
+  padding: 0px 0;
   text-align: center;
-  display: flex;
-  justify-content: center;
+  background-image: url(../public/app_background.png);
+  background-size: 105%;
 }
 
 .hero-content {
@@ -170,24 +127,17 @@ body {
 .card-collection {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 80px;
-  padding-top: 20px;
+  justify-content: space-around;
+  margin: 4px;
 }
 
 .card {
-  border: 1px solid  red;
+  border: 1px solid  #fff;
+  background-color: #fcfcfc;
   padding: 20px;
   text-align: center;
-  flex: 0 1 30%;
-  width: 30%;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  @media (max-width: 768px) {
-    flex: 0 1 40%;
-    width: 40%;
-    margin-bottom: 4px;
-  }
+  flex: 0 1 calc(20% - 8px); /* 20% width with some margin */
+  margin: 4px;
 }
 
 .footer {
@@ -197,19 +147,5 @@ body {
   font-weight: bolder;
   text-align: center;
   bottom: 0;
-  width: 100%;
-  height: 4%;
-
-}
-
-.search-bar {
-  padding-left: 4px;
-  min-width: 156px;
-}
-
-.search-input {
-  border-radius: 20px;
-  border: 1px solid #000;
-  height: 24px;
   width: 100%;
 }

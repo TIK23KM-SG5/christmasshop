@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 import { HamburgerIcon } from '../components/navbar-icons';
-import { UserInfo, MobileDropdown } from '../components/navbar-utilities';
+import { MobileDropdown } from '../components/navbar-utilities';
+import { UserInfo } from '../components/login-utilities';
 import SearchBar from '../../../uicomp/searchbar';
 
 const NavbarMobile = () => {

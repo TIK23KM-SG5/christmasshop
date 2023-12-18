@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { LogoIcon } from '../components/navbar-icons';
-import { DesktopPages, UserInfo } from '../components/navbar-utilities';
+import { DesktopPages } from '../components/navbar-utilities';
+import { UserInfo } from '../components/login-utilities';
 import SearchBar from '../../../uicomp/searchbar';
 
 const NavbarDesktop = () => (

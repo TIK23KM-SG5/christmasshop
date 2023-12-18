@@ -5,15 +5,12 @@ const Button = ({ label, onClick, className }) => {
     
   const buttonStyle = {
     // Add your default button styles here
-    padding: '10px 15px',
+    padding: '5px 8px',
     fontSize: '16px',
     cursor: 'pointer',
-    // You can add more styles based on the class
     ...(className === 'primary' && {
-      backgroundColor: '#007bff',
-      color: '#fff',
+      backgroundColor: 'transparent',
     }),
-    // Add more class-based styles as needed
   };
 
   return (

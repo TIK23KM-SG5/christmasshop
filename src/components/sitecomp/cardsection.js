@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Button from '../uicomp/button';
 import { cartSignal } from "../signals";
 import { useParams } from 'react-router-dom';
+import Button from '../uicomp/button'
+
 
 
 
@@ -11,13 +12,25 @@ const CardCollection = () => {
   const [products, setProducts] = useState([]);
   const [quantities, setQuantities] = useState({});
 
-  const {category} = useParams();
+
+  useEffect(() => {
+    // Set default quantity value for each product
+    const defaultQuantities = {};
+    products.forEach((product) => {
+      defaultQuantities[product.id] = 1;
+    });
+    setQuantities(defaultQuantities);
+  }, [products]);
+
+
+  const { category } = useParams();
+
 
   useEffect(() => {
     // Fetch products when the component mounts
     let url = 'http://localhost:3001/products';
 
-    if(category) {
+    if (category) {
       url = url + '?category=' + category;
     }
 
@@ -26,63 +39,94 @@ const CardCollection = () => {
       .catch(error => console.error(error));
   }, [category]);
 
-  function AddToCart(product, quantity){
-    const prod = cartSignal.value.find( p => p.id === product.id );
-    if( prod ){
-        prod.count++;
-        cartSignal.value = [...cartSignal.value];
-    }else{
-        cartSignal.value = [...cartSignal.value, {...product, count: quantity}];
+  function AddToCart(product) {
+
+    const quantity = quantities[product.id] || 1;
+    const prod = cartSignal.value.find(p => p.id === product.id);
+    if (prod) {
+      prod.count += quantity;
+      cartSignal.value = [...cartSignal.value];
+    } else {
+      cartSignal.value = [...cartSignal.value, { ...product, count: quantity }];
     }
-};
+  };
 
-function handleDecrement(product) {
-  setQuantities(prevQuantities => ({
-    ...prevQuantities,
-    [product.id]: Math.max((prevQuantities[product.id] || 0) - 1, 0)
-  }));
-}
+  function handleDecrement(product) {
+    setQuantities(prevQuantities => ({
+      ...prevQuantities,
+      [product.id]: Math.max((prevQuantities[product.id] || 1) - 1, 1)
+    }));
+  }
 
-function handleIncrement(product) {
-  setQuantities(prevQuantities => ({
-    ...prevQuantities,
-    [product.id]: (prevQuantities[product.id] || 0) + 1
-  }));
-}
+  function handleIncrement(product) {
+    setQuantities(prevQuantities => ({
+      ...prevQuantities,
+      [product.id]: (prevQuantities[product.id] || 0) + 1
+    }));
+  }
+
+  function handleChange(event, product) {
+    const newValue = event.target.value;
+    setQuantities(prevQuantities => ({
+      ...prevQuantities,
+      [product.id]: Number(newValue) || 0
+    }));
+  }
+
+  function handleClearField(product) {
+
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [product.id]: '',
+    }));
+  }
 
 
 
 
-	/*const [value, setValue] = useState(1);
-  const handleDecrement = () => {
-    setValue((prevValue) => (prevValue > 1 ? prevValue - 1 : 1));
-  };*/
 
 
 
+  const baseUrl = process.env.PUBLIC_URL || '';
 
   return (
     <div className="card-collection">
       {products.map((product, index) => (
         <div key={index} className="card">
           <h2>{product.productName}</h2>
-          <p>{product.price}</p>
-          
-          <Button onClick={() => AddToCart(product, quantities[product.id] || 1)} label="Add to cart" /> 
-          <button onClick={() => handleDecrement(product)}>-</button>
-          <form>
-            <input value={quantities[product.id] || 1} readOnly></input>
-          </form>
-			    <button onClick={() => handleIncrement(product)}>+</button>
-  
-          
-          
+          <img src={baseUrl + '/' + product.imageUrl} alt={product.productName} />
+          <p>{product.price}€</p>
+
+          <Button onClick={() => AddToCart(product)} label="Add to cart" />
+          <div className="card-buttons">
+            <button className='cartButton' onClick={() => handleDecrement(product)}>-</button>
+            <form>
+              <input
+                class="amountForm"
+                type="number"
+                value={quantities[product.id] || ''}
+                onChange={(event) => handleChange(event, product)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Backspace') {
+                    event.preventDefault();
+                    handleClearField(product);
+                  }
+                }}
+              />
+            </form>
+            <button className='cartButton' onClick={() => handleIncrement(product)}>+</button>
+          </div>
+
         </div>
       ))}
+
+
+
     </div>
 
 
+
   );
-      }
+}
 
 export default CardCollection;
